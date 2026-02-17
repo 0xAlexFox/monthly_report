@@ -300,7 +300,7 @@ def launch_gui(default_file1: str, default_file2: str, default_out: str) -> None
 
     def pick_file1() -> None:
         path = filedialog.askopenfilename(
-            title="Выберите первый файл",
+            title="Выберите отчет ОС",
             filetypes=[("Excel files", "*.xlsx"), ("All files", "*.*")],
         )
         if path:
@@ -308,7 +308,7 @@ def launch_gui(default_file1: str, default_file2: str, default_out: str) -> None
 
     def pick_file2() -> None:
         path = filedialog.askopenfilename(
-            title="Выберите второй файл",
+            title="Выберите отчет 1С",
             filetypes=[("Excel files", "*.xlsx"), ("All files", "*.*")],
         )
         if path:
@@ -316,7 +316,7 @@ def launch_gui(default_file1: str, default_file2: str, default_out: str) -> None
 
     def pick_out() -> None:
         path = filedialog.asksaveasfilename(
-            title="Куда сохранить отчет",
+            title="Куда сохранить файл сверки банка",
             defaultextension=".xlsx",
             filetypes=[("Excel files", "*.xlsx"), ("All files", "*.*")],
             initialfile=Path(out_var.get()).name if out_var.get() else "payments_comparison.xlsx",
@@ -333,10 +333,10 @@ def launch_gui(default_file1: str, default_file2: str, default_out: str) -> None
             messagebox.showerror("Ошибка", "Заполните все три пути: файл 1, файл 2 и выходной отчет.")
             return
         if not file1.is_file():
-            messagebox.showerror("Ошибка", f"Первый файл не найден:\n{file1}")
+            messagebox.showerror("Ошибка", f"отчет ОС не найден:\n{file1}")
             return
         if not file2.is_file():
-            messagebox.showerror("Ошибка", f"Второй файл не найден:\n{file2}")
+            messagebox.showerror("Ошибка", f"отчет 1С не найден:\n{file2}")
             return
 
         try:
@@ -358,15 +358,15 @@ def launch_gui(default_file1: str, default_file2: str, default_out: str) -> None
 
     root.columnconfigure(1, weight=1)
 
-    tk.Label(root, text="Укажите файл OC:").grid(row=0, column=0, padx=10, pady=10, sticky="w")
+    tk.Label(root, text="Укажите отчет OC:").grid(row=0, column=0, padx=10, pady=10, sticky="w")
     tk.Entry(root, textvariable=file1_var).grid(row=0, column=1, padx=10, pady=10, sticky="ew")
     tk.Button(root, text="Выбрать...", command=pick_file1, width=14).grid(row=0, column=2, padx=10, pady=10)
 
-    tk.Label(root, text="Укажите файл 1С:").grid(row=1, column=0, padx=10, pady=10, sticky="w")
+    tk.Label(root, text="Укажите отчет 1С:").grid(row=1, column=0, padx=10, pady=10, sticky="w")
     tk.Entry(root, textvariable=file2_var).grid(row=1, column=1, padx=10, pady=10, sticky="ew")
     tk.Button(root, text="Выбрать...", command=pick_file2, width=14).grid(row=1, column=2, padx=10, pady=10)
 
-    tk.Label(root, text="Файл отчета:").grid(row=2, column=0, padx=10, pady=10, sticky="w")
+    tk.Label(root, text="Файл сверки банка:").grid(row=2, column=0, padx=10, pady=10, sticky="w")
     tk.Entry(root, textvariable=out_var).grid(row=2, column=1, padx=10, pady=10, sticky="ew")
     tk.Button(root, text="Сохранить как...", command=pick_out, width=14).grid(row=2, column=2, padx=10, pady=10)
 
